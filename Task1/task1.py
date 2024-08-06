@@ -1,3 +1,5 @@
+import sys
+
 class PathCalculator:
     def __init__(self, n, m):
         self.n = n
@@ -17,11 +19,18 @@ class PathCalculator:
         """Выводит полученный путь."""
         print("Полученный путь:", ''.join(map(str, self.path)))
 
-
 def main():
-    # Получение входных данных от пользователя
-    input_user_n = int(input("Введите значение n: "))
-    input_user_m = int(input("Введите значение m: "))
+    # Проверка аргументов командной строки
+    if len(sys.argv) != 3:
+        print("Запустите в командной строке: python task1.py <n> <m>")
+        sys.exit(1)
+
+    try:
+        input_user_n = int(sys.argv[1])
+        input_user_m = int(sys.argv[2])
+    except ValueError:
+        print("Пожалуйста, введите целые числа для n и m.")
+        sys.exit(1)
 
     # Создание экземпляра класса
     path_calculator = PathCalculator(input_user_n, input_user_m)
@@ -29,7 +38,6 @@ def main():
     # Вычисление и вывод пути
     path_calculator.calculate_path()
     path_calculator.display_path()
-
 
 if __name__ == "__main__":
     main()
